@@ -1,24 +1,27 @@
 
 package org.sim.util;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Franky Villadiego
  */
 public class DateUtil {
 
-    private DateUtil() {
+    private static DateFormat formatDate=DateFormat.getDateInstance(DateFormat.MEDIUM);
+    private static DateFormat formatTime=DateFormat.getTimeInstance(DateFormat.SHORT);
+
+    private DateUtil(){}
+
+    public static String formatDate(Date date){
+        return formatDate.format(date);
     }
 
-    /**
-     * Retorna un falso o verdadero si la cadena en el parametro es
-     * nula o vacia.
-     *
-     * @param cadena
-     * @return boolean
-     */
-    public static boolean isNullOrEmpty(String cadena){
-        return (cadena==null || cadena.length()==0)?true:false;
+    public static String formatTime(Date time){
+        return formatTime.format(time);
     }
+
 
 }
