@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * MainWindow.java
  *
  * Created on 21/02/2011, 04:34:55 PM
@@ -11,13 +6,14 @@
 
 package org.sim.view;
 
+import org.sim.view.actions.PatientManagement;
 /**
  *
  * @author Franky Villadiego
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    /** Creates new form MainWindow */
+
     public MainWindow() {
         initComponents();
     }
@@ -35,8 +31,9 @@ public class MainWindow extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
+        patientManagement.setDesktopPane(desktopPane);
+        openMenuItem.setAction(patientManagement);
         saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
@@ -49,18 +46,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        fileMenu.setText("File");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("label"); // NOI18N
+        fileMenu.setText(bundle.getString("menu.file")); // NOI18N
 
-        openMenuItem.setText("Open");
+        openMenuItem.setText(bundle.getString("menu.patients")); // NOI18N
         fileMenu.add(openMenuItem);
 
-        saveMenuItem.setText("Save");
+        saveMenuItem.setText(bundle.getString("menu.entity")); // NOI18N
         fileMenu.add(saveMenuItem);
 
-        saveAsMenuItem.setText("Save As ...");
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setText("Exit");
+        exitMenuItem.setText(bundle.getString("menu.exit")); // NOI18N
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
@@ -116,16 +111,18 @@ public class MainWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
-        });
-    }
+//    /**
+//    * @param args the command line arguments
+//    */
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MainWindow().setVisible(true);
+//            }
+//        });
+//    }
+
+    private PatientManagement patientManagement = new PatientManagement();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -141,7 +138,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
