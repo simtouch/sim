@@ -81,9 +81,35 @@ public interface GenericDao{
      */
     public <T> Integer countRecords(Class<T> clazz) throws DaoLayerException;
 
+    /**
+     * Retorna el total de registros de una clase modelo segun unos criterios.
+     * 
+     * @param <T>
+     * @param clazz
+     * @param criterios
+     * @return
+     * @throws DaoLayerException
+     */
     public <T> Integer countRecords(Class<T> clazz, Map criterios) throws DaoLayerException;
 
+    /**
+     * Realiza una busqueda de una clase modelo segun unos criterios especificados en el mapa.
+     * 
+     * @param <T>
+     * @param clazz
+     * @param criterios
+     * @param fila
+     * @param pagina
+     * @return
+     * @throws DaoLayerException
+     */
     public <T> List<T> findByCriteria(Class<T> clazz, Map criterios, int fila, int pagina) throws DaoLayerException;
 
-    public MatchMode getMatchMode(int coincidencia);
+    /**
+     * Retorna el tipo de coincidencia para la generacion de criterios
+     * 
+     * @param matchType
+     * @return
+     */
+    public MatchMode getMatchMode(int matchType);
 }

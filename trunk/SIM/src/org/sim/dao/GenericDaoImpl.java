@@ -112,6 +112,7 @@ public abstract class GenericDaoImpl implements GenericDao{
                 return registrosAfectados.intValue();
             }
         }catch(DataAccessException ex){
+            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
             throw new DaoLayerException(ex);
         }
     }
@@ -129,7 +130,7 @@ public abstract class GenericDaoImpl implements GenericDao{
                 can=Integer.valueOf(lst.get(0).toString());
             }
         }catch(DataAccessException ex){
-            log.log(Level.WARNING, "Error en la consulta por parametro:{0}", ex);
+            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
             throw new DaoLayerException(ex);
         }catch(Exception ex){
             log.log(Level.WARNING, "Exception despues del bloque de consulta:{0}", ex);
@@ -159,10 +160,10 @@ public abstract class GenericDaoImpl implements GenericDao{
                 can=Integer.valueOf(lst.get(0).toString());
             }
         }catch(DataAccessException ex){
-            log.log(Level.WARNING, "Error en la consulta por parametro:{0}", ex);
+            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
             throw new DaoLayerException(ex);
         }catch(Exception ex){
-            log.log(Level.WARNING, "Exception despues del bloque de consulta:{0}", ex);
+            log.log(Level.WARNING, "Exception={0}", ex.getMessage());
             throw new DaoLayerException(ex);
         }
         return can;
@@ -192,15 +193,15 @@ public abstract class GenericDaoImpl implements GenericDao{
 	return lst;
     }
 
-    public MatchMode getMatchMode(int coincidencia){
+    public MatchMode getMatchMode(int matchType){
             MatchMode coincide=null;
-            if(coincidencia<=1 || coincidencia>4){
+            if(matchType<=1 || matchType>4){
                 coincide=MatchMode.EXACT;
-            }else if(coincidencia==2){
+            }else if(matchType==2){
                 coincide=MatchMode.START;
-            }else if(coincidencia==3){
+            }else if(matchType==3){
                 coincide=MatchMode.ANYWHERE;
-            }else if(coincidencia==4){
+            }else if(matchType==4){
                 coincide=MatchMode.END;
             }
             return coincide;
