@@ -1,7 +1,7 @@
 
 package org.sim.util;
 
-import org.sim.entity.User;
+import org.sim.repository.dao.security.UserJpa;
 
 /**
  *
@@ -11,7 +11,7 @@ public class UserInfo {
     /* Variables Miembro */
     private static UserInfo usuario;
     private static String elnombre;
-    private static User user;
+    private static UserJpa user;
     /* Constructor */
     private UserInfo() {
         //elnombre=nombre;
@@ -31,7 +31,7 @@ public class UserInfo {
             elnombre=nombre;    
         }
     }*/
-    public void setUser(User usuario){
+    public void setUser(UserJpa usuario){
         if(user==null){
             user=usuario;
         }
