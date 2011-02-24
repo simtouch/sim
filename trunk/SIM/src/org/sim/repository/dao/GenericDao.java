@@ -1,11 +1,11 @@
 
-package org.sim.dao;
+package org.sim.repository.dao;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.criterion.MatchMode;
-import org.sim.util.exceptions.DaoLayerException;
+import org.sim.util.exceptions.DaoException;
 
 /**
  *
@@ -20,7 +20,7 @@ public interface GenericDao{
      * @param entity
      * @throws DaoLayerException
      */
-    public <T> void insert(T entity) throws DaoLayerException;
+    public <T> void insert(T entity) throws DaoException;
 
     /**
      * Permite eliminar la Entidad.
@@ -29,7 +29,7 @@ public interface GenericDao{
      * @param entity
      * @throws DaoLayerException
      */
-    public <T> void delete(T entity) throws DaoLayerException;
+    public <T> void delete(T entity) throws DaoException;
 
     /**
      * Permite actualizar la Entidad.
@@ -37,7 +37,7 @@ public interface GenericDao{
      * @param entity
      * @throws DaoLayerException
      */
-    public <T> void update(T entity) throws DaoLayerException;
+    public <T> void update(T entity) throws DaoException;
 
     /**
      * <p>Permite traer todos los registros del tipo de Entidad en el parametro.
@@ -49,7 +49,7 @@ public interface GenericDao{
      * @return
      * @throws DaoLayerException
      */
-    public <T> List<T> listAll(Class<T> entityClass) throws DaoLayerException;
+    public <T> List<T> listAll(Class<T> entityClass) throws DaoException;
 
     /**
      * Carga una Entidad por su ID.
@@ -60,7 +60,7 @@ public interface GenericDao{
      * @return
      * @throws DaoLayerException
      */
-    public <T> T getById(Class<T> entityClass, Serializable id) throws DaoLayerException;
+    public <T> T getById(Class<T> entityClass, Serializable id) throws DaoException;
 
     /**
      * <p>Permite ejecutar una consulta en SQL natural (UPDATE, DELETE).
@@ -69,7 +69,7 @@ public interface GenericDao{
      * @return La cantidad de registros afectados.
      * @throws DaoLayerException
      */
-    public int executeSqlQuery(final String query) throws DaoLayerException;
+    public int executeSqlQuery(final String query) throws DaoException;
 
     /**
      * <p>Devuelve el total de registros que existen para una determinada clase de modelo.
@@ -79,7 +79,7 @@ public interface GenericDao{
      * @return cantidad de registros
      * @throws DaoLayerException
      */
-    public <T> Integer countRecords(Class<T> clazz) throws DaoLayerException;
+    public <T> Integer countRecords(Class<T> clazz) throws DaoException;
 
     /**
      * Retorna el total de registros de una clase modelo segun unos criterios.
@@ -90,7 +90,7 @@ public interface GenericDao{
      * @return
      * @throws DaoLayerException
      */
-    public <T> Integer countRecords(Class<T> clazz, Map criterios) throws DaoLayerException;
+    public <T> Integer countRecords(Class<T> clazz, Map criterios) throws DaoException;
 
     /**
      * Realiza una busqueda de una clase modelo segun unos criterios especificados en el mapa.
@@ -103,7 +103,7 @@ public interface GenericDao{
      * @return
      * @throws DaoLayerException
      */
-    public <T> List<T> findByCriteria(Class<T> clazz, Map criterios, int fila, int pagina) throws DaoLayerException;
+    public <T> List<T> findByCriteria(Class<T> clazz, Map criterios, int fila, int pagina) throws DaoException;
 
     /**
      * Retorna el tipo de coincidencia para la generacion de criterios

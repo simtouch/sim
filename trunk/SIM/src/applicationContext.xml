@@ -52,7 +52,7 @@
         <property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration"/>
         <property name="packagesToScan">
             <list>
-                <value>org.sim.entity</value>
+                <value>org.sim.repository.dao.patient</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -75,5 +75,7 @@
     <!--bean id="businessLoggingService" class="org.gestionabierta.utilidades.logging.BusinessLoggingInterceptor"/>
     <bean id="auditTrailService" class="org.gestionabierta.auditoria.AuditTrailInterceptor" /-->
 
-
+    <bean id="pacienteRepository" class="org.sim.repository.dao.patient.PacienteDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
 </beans>
