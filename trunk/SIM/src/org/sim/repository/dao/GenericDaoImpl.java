@@ -15,7 +15,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.sim.util.exceptions.DaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -44,152 +43,99 @@ public abstract class GenericDaoImpl implements GenericDao{
     }
 
 
-    public <T> void insert(T entity) throws DaoException {
-        try{
-            getHibernateTemplate().save(entity);
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
-        }
+    public <T> void insert(T entity) throws DataAccessException{
+        getHibernateTemplate().save(entity);
     }
 
-    public <T> void delete(T entity) throws DaoException {
-        try{
-            getHibernateTemplate().delete(entity);
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
-        }
+    public <T> void delete(T entity) throws DataAccessException {
+        getHibernateTemplate().delete(entity);
     }
 
-    public <T> void update(T entity) throws DaoException {
-        try{
-            getHibernateTemplate().update(entity);
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
-        }
+    public <T> void update(T entity) throws DataAccessException {
+        getHibernateTemplate().update(entity);
     }
 
 
-    public <T> List<T> listAll(Class<T> entityClass) throws DaoException {
+    public <T> List<T> listAll(Class<T> entityClass) throws DataAccessException {
         List<T> lst=null;
-        try{
-            lst = getHibernateTemplate().loadAll(entityClass);
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
-        }
+        lst = getHibernateTemplate().loadAll(entityClass);
 	return lst;
     }
 
 
-    public <T> T getById(Class<T> entityClass, Serializable id) throws DaoException {
-        try{
-            T o = (T) getHibernateTemplate().get(entityClass, id);
-            return o;
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
-        }
+    public <T> T getById(Class<T> entityClass, Serializable id) throws DataAccessException {
+        T o = (T) getHibernateTemplate().get(entityClass, id);
+        return o;
     }
 
-    public int executeSqlQuery(final String query) throws DaoException{
-        try{
-            Integer registrosAfectados=(Integer) getHibernateTemplate().execute(new HibernateCallback() {
-                public Integer doInHibernate(Session sn) throws HibernateException, SQLException {
-                    SQLQuery sqlQ=sn.createSQLQuery(query);
-                    int rowsAfectadas=sqlQ.executeUpdate();
-                    if(rowsAfectadas==0){
-                        log.log(Level.INFO, "La consulta [{0}] no afecto ningun registro", query);
-                    }
-                    return new Integer(rowsAfectadas);
+    public int executeSqlQuery(final String query) throws DataAccessException{
+        //TODO: Capturar HibernateException y SQLException para lanzar el DataAccessException adecuado
+        Integer registrosAfectados=(Integer) getHibernateTemplate().execute(new HibernateCallback() {
+            public Integer doInHibernate(Session sn) throws HibernateException, SQLException {
+                SQLQuery sqlQ=sn.createSQLQuery(query);
+                int rowsAfectadas=sqlQ.executeUpdate();
+                if(rowsAfectadas==0){
+                    log.log(Level.INFO, "La consulta [{0}] no afecto ningun registro", query);
                 }
-            });
-            if(registrosAfectados==null){
-                return 0;
-            }else{
-                return registrosAfectados.intValue();
+                return new Integer(rowsAfectadas);
             }
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex);
+        });
+        if(registrosAfectados==null){
+            return 0;
+        }else{
+            return registrosAfectados.intValue();
         }
     }
 
-    public <T> Integer countRecords(Class<T> clazz) throws DaoException {
+    public <T> Integer countRecords(Class<T> clazz) throws DataAccessException {
         Integer can=0;
         List lst=null;
-        try{
-            DetachedCriteria cr=DetachedCriteria.forClass(clazz);
-            cr.setProjection(Projections.rowCount());
-            lst=getHibernateTemplate().findByCriteria(cr);
-            if(lst==null || lst.isEmpty()){
-                return 0;
-            }else{
-                can=Integer.valueOf(lst.get(0).toString());
-            }
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex);
-        }catch(Exception ex){
-            log.log(Level.WARNING, "Exception despues del bloque de consulta:{0}", ex);
-            throw new DaoException(ex);
+        DetachedCriteria cr=DetachedCriteria.forClass(clazz);
+        cr.setProjection(Projections.rowCount());
+        lst=getHibernateTemplate().findByCriteria(cr);
+        if(lst==null || lst.isEmpty()){
+            return 0;
+        }else{
+            can=Integer.valueOf(lst.get(0).toString());
         }
         return can;
-
     }
 
-    public <T> Integer countRecords(Class<T> clazz, Map criterios) throws DaoException {
+    public <T> Integer countRecords(Class<T> clazz, Map criterios) throws DataAccessException {
         Integer can=0;
         List lst=null;
-        try{
-            DetachedCriteria cr=DetachedCriteria.forClass(clazz);
-            cr.setProjection(Projections.rowCount());
-            Iterator it=criterios.entrySet().iterator();
-            while(it.hasNext()){
-                Map.Entry entry=(Map.Entry)it.next();
-                if(entry.getValue()!=null && !entry.getValue().toString().isEmpty()){
-                    cr.add(Restrictions.like(entry.getKey().toString(), entry.getValue()));
-                }
+
+        DetachedCriteria cr=DetachedCriteria.forClass(clazz);
+        cr.setProjection(Projections.rowCount());
+        Iterator it=criterios.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry entry=(Map.Entry)it.next();
+            if(entry.getValue()!=null && !entry.getValue().toString().isEmpty()){
+                cr.add(Restrictions.like(entry.getKey().toString(), entry.getValue()));
             }
-            lst=getHibernateTemplate().findByCriteria(cr);
-            if(lst==null || lst.isEmpty()){
-                return 0;
-            }else{
-                can=Integer.valueOf(lst.get(0).toString());
-            }
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex);
-        }catch(Exception ex){
-            log.log(Level.WARNING, "Exception={0}", ex.getMessage());
-            throw new DaoException(ex);
+        }
+        lst=getHibernateTemplate().findByCriteria(cr);
+        if(lst==null || lst.isEmpty()){
+            return 0;
+        }else{
+            can=Integer.valueOf(lst.get(0).toString());
         }
         return can;
-
     }
 
-    public <T> List<T> findByCriteria(Class<T> clazz, Map criterios, int fila, int pagina) throws DaoException{
+    public <T> List<T> findByCriteria(Class<T> clazz, Map criterios, int fila, int pagina) throws DataAccessException{
         List<T> lst=null;
-        try{
 
-            DetachedCriteria cr=DetachedCriteria.forClass(clazz);
-            Iterator it=criterios.entrySet().iterator();
-            while(it.hasNext()){
-                Map.Entry entry=(Map.Entry)it.next();
-                if(entry.getValue()!=null && !entry.getValue().toString().isEmpty()){
-                    cr.add(Restrictions.like(entry.getKey().toString(), entry.getValue().toString(),MatchMode.ANYWHERE));    
-                }
+        DetachedCriteria cr=DetachedCriteria.forClass(clazz);
+        Iterator it=criterios.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry entry=(Map.Entry)it.next();
+            if(entry.getValue()!=null && !entry.getValue().toString().isEmpty()){
+                cr.add(Restrictions.like(entry.getKey().toString(), entry.getValue().toString(),MatchMode.ANYWHERE));
             }
-            lst = getHibernateTemplate().findByCriteria(cr,fila,pagina);
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
-        }catch(Exception ex){
-            log.log(Level.WARNING, "Exception={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
         }
+        lst = getHibernateTemplate().findByCriteria(cr,fila,pagina);
+
 	return lst;
     }
 
@@ -207,30 +153,25 @@ public abstract class GenericDaoImpl implements GenericDao{
             return coincide;
     }
 
-    public <T> T load(Class<T> clazz, Map criterios) throws DaoException {
+    public <T> T load(Class<T> clazz, Map criterios) throws DataAccessException {
         List<T> lst=null;
-        try{
 
-            DetachedCriteria cr=DetachedCriteria.forClass(clazz);
-            Iterator it=criterios.entrySet().iterator();
-            while(it.hasNext()){
-                Map.Entry entry=(Map.Entry)it.next();
-                if(entry.getValue()!=null && !entry.getValue().toString().isEmpty()){
-                    cr.add(Restrictions.like(entry.getKey().toString(), entry.getValue().toString(),MatchMode.ANYWHERE));    
-                }
+        DetachedCriteria cr=DetachedCriteria.forClass(clazz);
+        Iterator it=criterios.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry entry=(Map.Entry)it.next();
+            if(entry.getValue()!=null && !entry.getValue().toString().isEmpty()){
+                cr.add(Restrictions.like(entry.getKey().toString(), entry.getValue().toString(),MatchMode.ANYWHERE));
             }
-            lst = getHibernateTemplate().findByCriteria(cr);
-
-            if(lst!=null && lst.size()==1){
-                return lst.get(0);
-            }else{
-                return null;
-            }
-
-        }catch(DataAccessException ex){
-            log.log(Level.WARNING, "DataAccessException={0}", ex.getMessage());
-            throw new DaoException(ex.getMessage());
         }
+        lst = getHibernateTemplate().findByCriteria(cr);
+
+        if(lst!=null && lst.size()==1){
+            return lst.get(0);
+        }else{
+            return null;
+        }
+
     }
 
 

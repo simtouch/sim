@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.sim.domain;
 
 import org.sim.repository.PacienteRepository;
 import org.sim.util.exceptions.BusinessException;
+import org.sim.util.exceptions.ObjectNotFoundException;
 import org.sim.util.exceptions.RepositoryException;
 
 /**
@@ -16,8 +16,6 @@ import org.sim.util.exceptions.RepositoryException;
 public class Paciente {
 
     PacienteRepository pacienteRepository = PacienteRepository.Impl.getInstance();
-
-
     private int cedula;
     private String nombre;
     private String apellido;
@@ -28,9 +26,22 @@ public class Paciente {
         this.apellido = apellido;
     }
 
-    public Paciente() {}
+    public Paciente() {
+    }
 
-
+    public Paciente(int cedula) throws BusinessException {
+        if (cedula <= 0) {
+            throw new BusinessException("La cedula para cargar el Paciente debe ser un dato válido");
+        }
+        Paciente p = pacienteRepository.cargar(cedula);
+        if (p == null) {
+            this.cedula = cedula;
+            throw new ObjectNotFoundException("El paciente con cedula " + cedula + " no existe");
+        }
+        this.cedula = p.getCedula();
+        this.apellido = p.getApellido();
+        this.nombre = p.getNombre();
+    }
     /* Getters y Setters */
 
     public String getApellido() {
@@ -59,7 +70,6 @@ public class Paciente {
 
 
     /* Metodos basicos */
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -84,22 +94,6 @@ public class Paciente {
 
 
     /* Metodos de negocio */
-
-    public void guardar() throws RepositoryException, BusinessException{
-        // Reglas de negocio antes de guardar
-        pacienteRepository.guardar(this);
-    }
-
-    public void actualizar() throws RepositoryException, BusinessException{
-        // Reglas de negocio antes de actualizar
-        pacienteRepository.actualizar(this);
-    }
-
-    public void eliminar() throws RepositoryException, BusinessException{
-        // Reglas de negocio antes de eliminar
-        pacienteRepository.eliminar(this);
-    }
-
 
 
 }

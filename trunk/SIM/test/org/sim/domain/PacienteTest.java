@@ -40,7 +40,7 @@ public class PacienteTest extends AbstractJUnit4SpringContextTests{
 
         System.out.println("Cantidad de Registros ----> "+recordAmount);
         Paciente p = new Paciente(123456789, "JULANO", "DE TAL");
-        p.guardar();
+        pacienteRepository.guardar(p);
         //PatientJpa p=createPatient("PRUEBA");
         //patientDao.insert(p);
         lst = pacienteRepository.listarPacientes();
@@ -52,7 +52,7 @@ public class PacienteTest extends AbstractJUnit4SpringContextTests{
        }
 
        p.setNombre("NUEVA PREUBA");
-       p.actualizar();
+       pacienteRepository.actualizar(p);
        //patientDao.update(p);
 
        lst = pacienteRepository.listarPacientes();
@@ -63,8 +63,9 @@ public class PacienteTest extends AbstractJUnit4SpringContextTests{
            System.out.println(o.getCedula() + " - " + o.getNombre() + " - " + o.getApellido());
            System.out.println("-----------------------------------------");
        }
-       p.eliminar();
+       //p.eliminar();
        //patientDao.delete(p);
+       pacienteRepository.eliminar(p);
 
         List<Paciente> lst2=pacienteRepository.listarPacientes();
         Assert.assertEquals(recordAmount, lst2.size());

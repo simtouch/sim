@@ -25,6 +25,8 @@ public interface PacienteRepository {
 
     public List<Paciente> listarPacientes() throws RepositoryException;
 
+    public Paciente cargar(int cedula) throws RepositoryException;
+
     public static class Impl{
         public static PacienteRepository getInstance(){
             return (PacienteRepository)BeanContainer.getBean(PacienteRepository.class);
