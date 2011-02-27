@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sim.repository.dao.patient.PatientJpa;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import junit.framework.Assert;
@@ -72,10 +71,5 @@ public class PacienteTest extends AbstractJUnit4SpringContextTests{
     }
 
 
-    private PatientJpa createPatient(String name){
-        PatientJpa p=new PatientJpa();
-        p.setName(name);
-        return p;
-    }
 
 }

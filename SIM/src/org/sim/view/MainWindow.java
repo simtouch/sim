@@ -6,6 +6,8 @@
 
 package org.sim.view;
 
+import javax.swing.JOptionPane;
+import org.sim.security.Usuario;
 import org.sim.view.actions.PatientManagement;
 /**
  *
@@ -45,6 +47,11 @@ public class MainWindow extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("label"); // NOI18N
         fileMenu.setText(bundle.getString("menu.file")); // NOI18N
@@ -53,6 +60,11 @@ public class MainWindow extends javax.swing.JFrame {
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setText(bundle.getString("menu.entity")); // NOI18N
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveMenuItem);
 
         exitMenuItem.setText(bundle.getString("menu.exit")); // NOI18N
@@ -97,7 +109,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,6 +122,20 @@ public class MainWindow extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        EntidadFrm entidadFrm = new EntidadFrm();
+        desktopPane.add(entidadFrm);
+        entidadFrm.show();
+
+    }//GEN-LAST:event_saveMenuItemActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+//        Usuario u = Usuario.cargar("franky");
+//        if(u==null){
+//            JOptionPane.showMessageDialog(null, "Aun no hay usuarios en la BD");
+//        }
+    }//GEN-LAST:event_formWindowOpened
 
 //    /**
 //    * @param args the command line arguments
