@@ -18,6 +18,7 @@ import org.sim.util.exceptions.RepositoryException;
 /**
  *
  * @author Franky Villadiego
+ * @author Lerkis Causado Epitia
  */
 @Entity
 @Table(name = "entidades")
