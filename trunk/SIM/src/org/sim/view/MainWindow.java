@@ -114,7 +114,7 @@ public class MainWindow extends javax.swing.JFrame {
         pacienteMenuItem.setText(bundle.getString("menu.patients")); // NOI18N
         archivoMenu.add(pacienteMenuItem);
 
-        entidadMenuItem.setAction(new MostrarFormEntidad(desktopPane, entidadFrm));
+        entidadMenuItem.setAction(new MostrarFormEntidad(desktopPane, entidadFrm, true));
         entidadMenuItem.setText(bundle.getString("menu.entity")); // NOI18N
         archivoMenu.add(entidadMenuItem);
 

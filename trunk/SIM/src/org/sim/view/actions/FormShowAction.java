@@ -1,6 +1,7 @@
 
 package org.sim.view.actions;
 
+import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ public abstract class FormShowAction extends GenericAction{
 
     private JDesktopPane desktopPane;
     private JInternalFrame frame;
+    private boolean centrado;
 
     protected FormShowAction(Class child) {
         super(child);
@@ -40,6 +42,15 @@ public abstract class FormShowAction extends GenericAction{
         this.frame = frame;
     }
 
+    protected boolean isCentrado() {
+        return centrado;
+    }
+
+    protected void setCentrado(boolean centrado) {
+        this.centrado = centrado;
+    }
+
+
     protected void mostrarFrame(){
         if(desktopPane != null && frame != null){
             final JInternalFrame[] frames = desktopPane.getAllFrames();
@@ -59,6 +70,14 @@ public abstract class FormShowAction extends GenericAction{
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         }
+    }
+
+    protected void centrarFrame(){
+        final Dimension containerSize = getDesktopPane().getSize();
+        final Dimension frameSize = getFrame().getSize();
+        int x = (containerSize.width - frameSize.width) / 2;
+        int y = (containerSize.height - frameSize.height) / 2;
+        getFrame().setLocation(x, y);
     }
 
 

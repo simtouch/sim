@@ -26,13 +26,17 @@ public class Main {
         String canonicalPath=null;
         try{
             canonicalPath=f.getCanonicalPath();
-            System.out.println("[[  CanonicalPath()="+canonicalPath+ "  ]]");
         }catch(IOException ex){
             ex.printStackTrace();
         }
         path=canonicalPath;
         imagePath=path+File.separator+"imagenes";
         reportPath=path+File.separator+"reportes";
+
+        System.out.println(">>  Iniciando propiedades basicas del sistema   <<");
+        System.out.println(">>  Ruta base del sistema ...........: " + path);
+        System.out.println(">>  Ruta de imagenes externas .......: " + imagePath);
+        System.out.println(">>  Ruta para reportes ..............: " + reportPath);
 
     }
     public static void main(String[] args) {
@@ -53,10 +57,8 @@ public class Main {
                     ex.printStackTrace();
                 }
 
-
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.setExtendedState(mainWindow.getExtendedState() | mainWindow.MAXIMIZED_BOTH);
-                mainWindow.setVisible(true);
+                LoginFrm loginFrm = new LoginFrm(null, true);
+                loginFrm.mostrar(true);
                 
             }
         });
