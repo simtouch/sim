@@ -5,8 +5,6 @@
 
 package org.sim.security;
 
-import org.sim.repository.*;
-import org.sim.domain.Entidad;
 import org.sim.util.BeanContainer;
 import org.sim.util.exceptions.RepositoryException;
 

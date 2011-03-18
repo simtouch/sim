@@ -25,12 +25,17 @@ public class BeanContainer {
 			new PropertyPlaceholderHelper(PLACEHOLDER_PREFIX, PLACEHOLDER_SUFFIX, VALUE_SEPARATOR, false);
 
     private ApplicationContext ac;
-    private static BeanContainer instance=new BeanContainer();
+    private static BeanContainer instance;
     private BeanContainer() {
         ac=new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
+    private static void createInstance(){
+        instance=new BeanContainer();
+    }
+
     public static synchronized <T> T getBean(Class<T> cls){
+        if(instance==null) createInstance();
         synchronized(instance.ac){
             return instance.ac.getBean(cls);
         }

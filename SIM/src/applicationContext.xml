@@ -53,6 +53,7 @@
         <property name="packagesToScan">
             <list>
                 <value>org.sim.domain</value>
+                <value>org.sim.security</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -80,8 +81,8 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 
-    <!--bean id="usuarioRepository" class="org.sim.security.UsuarioDao">
+    <bean id="usuarioRepository" class="org.sim.security.UsuarioDao">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
-    </bean-->
+    </bean>
 
 </beans>

@@ -10,8 +10,6 @@
  */
 
 package org.sim.view;
-
-import org.sim.view.actions.CreatePatient;
 /**
  *
  * @author fvilladiego

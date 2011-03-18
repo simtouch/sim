@@ -8,7 +8,6 @@ package org.sim.view.actions;
 import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
-import javax.swing.JInternalFrame.JDesktopIcon;
 
 /**
  *
@@ -23,8 +22,16 @@ public class MostrarFormEntidad extends FormShowAction {
         setEnabled(true);
     }
 
+    public MostrarFormEntidad(JDesktopPane contenedor, JInternalFrame frame, boolean centrado) {
+        super(MostrarFormEntidad.class);
+        setDesktopPane(contenedor);
+        setFrame(frame);
+        setCentrado(centrado);
+        setEnabled(true);
+    }
 
     public void actionPerformed(ActionEvent e) {
+        if(isCentrado()) centrarFrame();
         mostrarFrame();
     }
 
