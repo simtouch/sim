@@ -47,6 +47,15 @@ public class EntidadDao extends GenericDaoImpl implements EntidadRepository{
         return entidad;
     }
 
+    @Transactional
+    public void guardarOrActualizar(Entidad entidad) throws RepositoryException {
+        try{
+            saveOrUpdate(entidad);
+        }catch(DataAccessException ex){
+            log.log(Level.WARNING, ex.getClass().getName() + "={0}", ex.getMessage());
+        }
+    }
+
     
 
 }

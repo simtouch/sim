@@ -12,19 +12,16 @@ import org.sim.view.PatientDialog;
  *
  * @author Franky Villadiego
  */
-public class CreatePatient extends GenericAction{
+public class CreatePatient extends FormShowAction{
 
     public CreatePatient() {
-        super("CreatePatient");
+        super(CreatePatient.class);
     }
-
-
-
 
 
     public void actionPerformed(ActionEvent e) {
 
-        new PatientDialog(null, true);
+
     }
 
 

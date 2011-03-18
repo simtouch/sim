@@ -18,6 +18,7 @@ public interface EntidadRepository /*extends GenericDao*/ {
 
     public void guardar(Entidad entidad)throws RepositoryException;
     public void actualizar(Entidad entidad)throws RepositoryException;
+    public void guardarOrActualizar(Entidad entidad)throws RepositoryException;
     public Entidad cargar(String codigo)throws RepositoryException;
 
     public static class Impl{

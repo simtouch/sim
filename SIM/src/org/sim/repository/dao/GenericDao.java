@@ -40,6 +40,14 @@ public interface GenericDao{
     public <T> void update(T entity) throws DataAccessException;
 
     /**
+     * Permite guardar o actualizar dependiendo el estado del objeto.
+     * @param <T>
+     * @param entity
+     * @throws DataAccessException
+     */
+    public <T> void saveOrUpdate(T entity) throws DataAccessException;
+
+    /**
      * <p>Permite traer todos los registros del tipo de Entidad en el parametro.
      * <p>No se recomienda este metodo para traer grandes cantidades de registro ya
      * que degrada el rendimiento.

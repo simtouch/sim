@@ -6,26 +6,25 @@
 package org.sim.view.actions;
 
 import java.awt.event.ActionEvent;
-import org.sim.view.PatientDialog;
-import org.sim.view.PacientesFrm;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author Franky Villadiego
  */
-public class PatientManagement extends FormShowAction{
+public class MostrarFormPacientes extends FormShowAction {
 
-    public PatientManagement() {
-        super(PatientManagement.class);
+    public MostrarFormPacientes(JDesktopPane contenedor, JInternalFrame frame) {
+        super(MostrarFormPacientes.class);
+        setDesktopPane(contenedor);
+        setFrame(frame);
         setEnabled(true);
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        //TODO: Verificar los permisos de un usuario antes de realizar alguna accion
         mostrarFrame();
     }
-
-
 
 }
