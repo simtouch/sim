@@ -6,9 +6,6 @@
 
 package org.sim.view;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
-import org.sim.security.Usuario;
 import org.sim.view.actions.*;
 
 /**
