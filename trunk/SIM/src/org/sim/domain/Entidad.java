@@ -75,7 +75,7 @@ public class Entidad implements Serializable {
 
     public void guardar() throws RepositoryException, BusinessException{
         if (validar()) {
-            entidadRepository.guardar(this);
+            entidadRepository.guardarOrActualizar(this);
         }
     }
 

@@ -6,6 +6,7 @@
 package org.sim.view.actions;
 
 import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 
 /**
@@ -14,11 +15,13 @@ import javax.swing.JDesktopPane;
  */
 public abstract class GenericAction extends AbstractAction{
 
-    private JDesktopPane desktopPane;
+    
 
-    public GenericAction(String child) {
+    public GenericAction(Class child) {
 
-        String name = child;
+        //TODO: Cargar el sistema de seguridad y las acciones que un usuario tiene permiso
+        
+        String name = child.getName();
         System.out.println("**********************");
         System.out.println(name);
         System.out.println("**********************");
@@ -27,12 +30,5 @@ public abstract class GenericAction extends AbstractAction{
         setEnabled(false);
     }
 
-    public JDesktopPane getDesktopPane() {
-        return desktopPane;
-    }
-
-    public void setDesktopPane(JDesktopPane desktopPane) {
-        this.desktopPane = desktopPane;
-    }
 
 }

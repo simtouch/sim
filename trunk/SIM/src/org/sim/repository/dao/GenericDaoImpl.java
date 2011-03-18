@@ -55,6 +55,9 @@ public abstract class GenericDaoImpl implements GenericDao{
         getHibernateTemplate().update(entity);
     }
 
+    public <T> void saveOrUpdate(T entity) throws DataAccessException {
+        getHibernateTemplate().saveOrUpdate(entity);
+    }
 
     public <T> List<T> listAll(Class<T> entityClass) throws DataAccessException {
         List<T> lst=null;
