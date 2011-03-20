@@ -81,6 +81,14 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 
+    <bean id="cupsRepository" class="org.sim.repository.dao.CupsDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+    <bean id="diagnosticoRepository" class="org.sim.repository.dao.DiagnosticoDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
     <bean id="usuarioRepository" class="org.sim.security.UsuarioDao">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>

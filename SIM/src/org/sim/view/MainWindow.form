@@ -67,11 +67,17 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="codigoCUPSMenuItem">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new MostrarFormCups(desktopPane, cupsFrm, true)" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="C&#xf3;digos CUPS"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="diagnosticoMenuItem">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new MostrarFormCups(desktopPane, diagnosticoFrm,true)" type="code"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Diagn&#xf3;sticos CIE10"/>
               </Properties>
             </MenuItem>
