@@ -19,6 +19,8 @@ public class MainWindow extends javax.swing.JFrame {
     /***********************************************/
     EntidadFrm entidadFrm = new EntidadFrm();
     PacientesFrm pacientesFrm = new PacientesFrm();
+    CUPSFrm cupsFrm = new CUPSFrm();
+    DiagnosticoFrm diagnosticoFrm = new DiagnosticoFrm();
 
     
 
@@ -140,9 +142,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         herramientasMenu.setText("Herramientas");
 
+        codigoCUPSMenuItem.setAction(new MostrarFormCups(desktopPane, cupsFrm, true));
         codigoCUPSMenuItem.setText("Códigos CUPS");
         herramientasMenu.add(codigoCUPSMenuItem);
 
+        diagnosticoMenuItem.setAction(new MostrarFormCups(desktopPane, diagnosticoFrm,true));
         diagnosticoMenuItem.setText("Diagnósticos CIE10");
         herramientasMenu.add(diagnosticoMenuItem);
 
