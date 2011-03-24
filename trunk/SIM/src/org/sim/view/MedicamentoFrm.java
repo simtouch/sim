@@ -13,18 +13,18 @@ package org.sim.view;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import org.sim.domain.Cups;
+import org.sim.domain.Medicamento;
 import org.sim.util.exceptions.RepositoryException;
 
 /**
  *
  * @author Administrador
  */
-public class CUPSFrm extends javax.swing.JInternalFrame {
+public class MedicamentoFrm extends javax.swing.JInternalFrame {
 
-    private Cups cups;
+    private Medicamento medicamento;
     /** Creates new form CUPSFrm */
-    public CUPSFrm() {
+    public MedicamentoFrm() {
         initComponents();
     }
 
@@ -39,8 +39,8 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtCodigo_CUPS = new javax.swing.JTextField();
-        txtNombre_CUPS = new javax.swing.JTextField();
+        txtCodigo_Medicamento = new javax.swing.JTextField();
+        txtNombre_Medicamento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
         btnNuevo = new javax.swing.JButton();
@@ -52,21 +52,21 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
 
         setClosable(true);
-        setTitle("Registro y Consulta de CUPS");
+        setTitle("Registro y Consulta de Medicamentos");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Registro de Codigos CUPS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 11))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Registro de Medicamentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 11))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 11));
         jLabel1.setText("Código");
 
-        txtCodigo_CUPS.setFont(new java.awt.Font("Verdana", 0, 11));
-        txtCodigo_CUPS.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCodigo_Medicamento.setFont(new java.awt.Font("Verdana", 0, 11));
+        txtCodigo_Medicamento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigo_CUPSKeyPressed(evt);
+                txtCodigo_MedicamentoKeyPressed(evt);
             }
         });
 
-        txtNombre_CUPS.setFont(new java.awt.Font("Verdana", 0, 11));
+        txtNombre_Medicamento.setFont(new java.awt.Font("Verdana", 0, 11));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 11));
         jLabel2.setText("Nombre");
@@ -78,13 +78,12 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(txtCodigo_CUPS, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo_Medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(393, Short.MAX_VALUE))
-                    .addComponent(txtNombre_CUPS, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)))
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombre_Medicamento, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,8 +93,8 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigo_CUPS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre_CUPS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtCodigo_Medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre_Medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jToolBar1.setBorder(null);
@@ -143,7 +142,7 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
         jToolBar1.add(jSeparator2);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/magnifier.png"))); // NOI18N
-        jButton5.setToolTipText("Consular");
+        jButton5.setToolTipText("Consultar");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -164,7 +163,8 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -172,20 +172,20 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodigo_CUPSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigo_CUPSKeyPressed
+    private void txtCodigo_MedicamentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigo_MedicamentoKeyPressed
         int codigoTecla = evt.getKeyCode();
         if(codigoTecla == KeyEvent.VK_ENTER || codigoTecla == KeyEvent.VK_TAB){
-            cups = Cups.cargar(txtCodigo_CUPS.getText());
-            txtCodigo_CUPS.setEnabled(false);
-            txtNombre_CUPS.requestFocus();
-            if(cups != null){
-                txtNombre_CUPS.setText(cups.getNombre());
+            medicamento = Medicamento.cargar(txtCodigo_Medicamento.getText());
+            txtCodigo_Medicamento.setEnabled(false);
+            txtNombre_Medicamento.requestFocus();
+            if(medicamento != null){
+                txtNombre_Medicamento.setText(medicamento.getNombre());
             }else{
-                txtNombre_CUPS.setText("");
+                txtNombre_Medicamento.setText("");
             }
 
         }
-}//GEN-LAST:event_txtCodigo_CUPSKeyPressed
+}//GEN-LAST:event_txtCodigo_MedicamentoKeyPressed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         nuevo();
@@ -196,19 +196,19 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
         nuevo();
 }//GEN-LAST:event_btnGuardarActionPerformed
  private void nuevo(){
-        txtCodigo_CUPS.setEnabled(true);
-        txtCodigo_CUPS.setText("");
-        txtCodigo_CUPS.requestFocus();
-        txtNombre_CUPS.setText("");
-        cups = null;
+        txtCodigo_Medicamento.setEnabled(true);
+        txtCodigo_Medicamento.setText("");
+        txtCodigo_Medicamento.requestFocus();
+        txtNombre_Medicamento.setText("");
+        medicamento = null;
     }
 
     private void guardar(){
-        if(cups == null) cups = new Cups();
-        cups.setCodigo(txtCodigo_CUPS.getText());
-        cups.setNombre(txtNombre_CUPS.getText());
+        if(medicamento == null) medicamento = new Medicamento();
+        medicamento.setCodigo(txtCodigo_Medicamento.getText());
+        medicamento.setNombre(txtNombre_Medicamento.getText());
         try{
-            cups.guardar();
+            medicamento.guardar();
         }catch(RepositoryException ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -226,8 +226,8 @@ public class CUPSFrm extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTextField txtCodigo_CUPS;
-    private javax.swing.JTextField txtNombre_CUPS;
+    private javax.swing.JTextField txtCodigo_Medicamento;
+    private javax.swing.JTextField txtNombre_Medicamento;
     // End of variables declaration//GEN-END:variables
 
 }
