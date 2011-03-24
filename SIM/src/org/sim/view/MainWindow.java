@@ -6,6 +6,7 @@
 
 package org.sim.view;
 
+import org.sim.view.MedicamentoFrm;
 import org.sim.view.actions.*;
 
 /**
@@ -21,6 +22,8 @@ public class MainWindow extends javax.swing.JFrame {
     PacientesFrm pacientesFrm = new PacientesFrm();
     CUPSFrm cupsFrm = new CUPSFrm();
     DiagnosticoFrm diagnosticoFrm = new DiagnosticoFrm();
+    MedicamentoFrm medicamentoFrm = new MedicamentoFrm();
+    PacienteFrm pacienteFrm = new PacienteFrm();
 
     
 
@@ -112,7 +115,7 @@ public class MainWindow extends javax.swing.JFrame {
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("label"); // NOI18N
         archivoMenu.setText(bundle.getString("menu.file")); // NOI18N
 
-        pacienteMenuItem.setAction(new MostrarFormPacientes(desktopPane, pacientesFrm));
+        pacienteMenuItem.setAction(new MostrarFormCups(desktopPane, pacienteFrm, true));
         pacienteMenuItem.setText(bundle.getString("menu.patients")); // NOI18N
         archivoMenu.add(pacienteMenuItem);
 
@@ -150,6 +153,7 @@ public class MainWindow extends javax.swing.JFrame {
         diagnosticoMenuItem.setText("Diagnósticos CIE10");
         herramientasMenu.add(diagnosticoMenuItem);
 
+        medicamentoMenuItem.setAction(new MostrarFormCups(desktopPane,medicamentoFrm, true));
         medicamentoMenuItem.setText("Medicamentos");
         herramientasMenu.add(medicamentoMenuItem);
         herramientasMenu.add(jSeparator1);
