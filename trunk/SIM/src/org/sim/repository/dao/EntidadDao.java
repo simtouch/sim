@@ -1,5 +1,9 @@
 package org.sim.repository.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.sim.domain.Entidad;
@@ -54,6 +58,22 @@ public class EntidadDao extends GenericDaoImpl implements EntidadRepository{
         }catch(DataAccessException ex){
             log.log(Level.WARNING, ex.getClass().getName() + "={0}", ex.getMessage());
         }
+    }
+
+    public List<Entidad> listar(boolean soloActivas) throws RepositoryException {
+        List<Entidad> lst = null;
+        Map mapa = new HashMap();
+        try{
+            if(soloActivas){
+                mapa.put("estado", Entidad.ACTIVO);
+            }
+            lst = findByCriteria(Entidad.class, mapa);
+        }catch(DataAccessException ex){
+            log.log(Level.WARNING, ex.getClass().getName() + "={0}", ex.getMessage());
+        }
+        if(lst==null) return new ArrayList<Entidad>();
+        return lst;
+
     }
 
     

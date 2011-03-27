@@ -142,6 +142,22 @@ public abstract class GenericDaoImpl implements GenericDao{
 	return lst;
     }
 
+    public <T> List<T> findByCriteria(Class<T> clazz, Map criterios) throws DataAccessException{
+        List<T> lst=null;
+
+        DetachedCriteria cr=DetachedCriteria.forClass(clazz);
+        Iterator it=criterios.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry entry=(Map.Entry)it.next();
+            if(entry.getValue()!=null && !entry.getValue().toString().isEmpty()){
+                cr.add(Restrictions.like(entry.getKey().toString(), entry.getValue().toString(),MatchMode.ANYWHERE));
+            }
+        }
+        lst = getHibernateTemplate().findByCriteria(cr);
+	return lst;
+    }
+
+
     public MatchMode getMatchMode(int matchType){
             MatchMode coincide=null;
             if(matchType<=1 || matchType>4){
