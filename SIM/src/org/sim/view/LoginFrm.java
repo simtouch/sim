@@ -3,8 +3,16 @@ package org.sim.view;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingWorker;
+import org.jdesktop.swingx.JXBusyLabel;
+import org.jdesktop.swingx.JXErrorPane;
 import org.sim.security.Usuario;
+import org.sim.util.exceptions.RepositoryException;
 
 /**
  *
@@ -16,6 +24,7 @@ public class LoginFrm extends javax.swing.JDialog {
     public LoginFrm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jxBusyLabel.setVisible(false);
     }
 
     /** This method is called from within the constructor to
@@ -34,6 +43,7 @@ public class LoginFrm extends javax.swing.JDialog {
         txtClave = new javax.swing.JPasswordField();
         btnAceptar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        jxBusyLabel = new org.jdesktop.swingx.JXBusyLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Control de entrada al sistema");
@@ -88,6 +98,8 @@ public class LoginFrm extends javax.swing.JDialog {
             }
         });
 
+        jxBusyLabel.setFocusable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,10 +107,15 @@ public class LoginFrm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                            .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jxBusyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,9 +127,11 @@ public class LoginFrm extends javax.swing.JDialog {
                         .addGap(6, 6, 6)
                         .addComponent(btnAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCerrar))
+                        .addComponent(btnCerrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jxBusyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,12 +143,9 @@ public class LoginFrm extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
-        Usuario usuario = Usuario.cargar("1234");
-        System.out.println("*** INI SYSTEM User = "+usuario);
-        dispose();
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.setExtendedState(mainWindow.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        mainWindow.setVisible(true);
+        Entrada e = new Entrada(btnAceptar, jxBusyLabel);
+        e.execute();
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     public void centerScreen() {
@@ -149,6 +165,61 @@ public class LoginFrm extends javax.swing.JDialog {
     }
 
 
+    private class Entrada extends SwingWorker<Boolean, Object>{
+
+        private Exception exception;
+        private JButton button;
+        private JXBusyLabel busyLabel;
+
+        public Entrada(JButton button, JXBusyLabel busyLabel) {
+            this.button = button;
+            this.busyLabel = busyLabel;
+        }
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            try{
+                button.setEnabled(false);
+                busyLabel.setVisible(true);
+                busyLabel.setBusy(true);
+                Usuario usuario = Usuario.cargar("1234");
+                //TODO: Activar la seguridad cuando este listo, descomentar el return false
+                //if(usuario==null) return false;
+            }catch(RepositoryException ex){
+                exception = ex;
+                return false;
+            }
+            return true;
+        }
+
+      
+
+
+        @Override
+        protected void done() {
+            
+            button.setEnabled(true);
+            busyLabel.setBusy(false);
+            busyLabel.setVisible(false);
+            try {
+                final Boolean resultado=get();
+                if(resultado==false){
+                    JXErrorPane.showDialog(exception);
+                }else{
+                    dispose();
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.setExtendedState(mainWindow.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+                    mainWindow.setVisible(true);
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(LoginFrm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ExecutionException ex) {
+                Logger.getLogger(LoginFrm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }
 
 
 
@@ -158,6 +229,7 @@ public class LoginFrm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private org.jdesktop.swingx.JXBusyLabel jxBusyLabel;
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
