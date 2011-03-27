@@ -114,6 +114,18 @@ public interface GenericDao{
     public <T> List<T> findByCriteria(Class<T> clazz, Map criterios, int fila, int pagina) throws DataAccessException;
 
     /**
+     * Realiza una busqueda por un mapa de criterios, los criterios en el mapa son
+     * los nombres de Propiedad(key) y valor
+     * 
+     * @param <T>
+     * @param clazz
+     * @param criterios
+     * @return
+     * @throws DataAccessException
+     */
+    public <T> List<T> findByCriteria(Class<T> clazz, Map criterios) throws DataAccessException;
+
+    /**
      * Retorna el tipo de coincidencia para la generacion de criterios
      * 
      * @param matchType

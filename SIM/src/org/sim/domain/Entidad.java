@@ -5,6 +5,7 @@
 package org.sim.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -73,6 +74,13 @@ public class Entidad implements Serializable {
         this.nombre = nombre;
     }
 
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
+
+
     public void guardar() throws RepositoryException, BusinessException{
         if (validar()) {
             entidadRepository.guardarOrActualizar(this);
@@ -93,5 +101,10 @@ public class Entidad implements Serializable {
     public static Entidad cargar(String codigo) {
         Entidad entidad = entidadRepository.cargar(codigo);
         return entidad;
+    }
+
+    public static List<Entidad> listar(boolean soloActivas){
+        List<Entidad> lst = EntidadRepository.Impl.getInstance().listar(true);
+        return lst;
     }
 }

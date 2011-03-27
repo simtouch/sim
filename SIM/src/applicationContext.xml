@@ -101,4 +101,8 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 
+    <bean id="tipoPacienteRepository" class="org.sim.repository.dao.TipoPacienteDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
 </beans>
