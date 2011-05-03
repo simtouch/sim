@@ -105,4 +105,12 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 
+    <bean id="departamentoRepository" class="org.sim.repository.dao.DepartamentoDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+    <bean id="municipioRepository" class="org.sim.repository.dao.MunicipioDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
 </beans>
