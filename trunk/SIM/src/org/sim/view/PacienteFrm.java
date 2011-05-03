@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import org.sim.domain.Entidad;
 import org.sim.domain.TipoIdentificacion;
 import org.sim.domain.TipoPaciente;
+import org.sim.util.SwingUtil;
 
 /**
  *
@@ -169,28 +170,26 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel15))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(cboDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(cboDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addComponent(cboMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel16)
-                                        .addGap(49, 49, 49))
-                                    .addComponent(cboTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboZona, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel17)
+                            .addComponent(cboMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel16)
+                                    .addGap(49, 49, 49))
+                                .addComponent(cboTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(cboZona, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -410,15 +409,22 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
 }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cboEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEntidadActionPerformed
-       Entidad entidadSeleccionada = (Entidad) cboEntidad.getSelectedItem();
-       txtCodigo_Entidad.setText(entidadSeleccionada.getCodigo());
+       
+        Object entidadSeleccionada = cboEntidad.getSelectedItem();
+        if(entidadSeleccionada instanceof Entidad){
+            txtCodigo_Entidad.setText(((Entidad)entidadSeleccionada).getCodigo());
+        }else{
+            txtCodigo_Entidad.setText("");
+        }
+       
     }//GEN-LAST:event_cboEntidadActionPerformed
 
 
 public void show(){
     super.show();
     cboTipoIdentificacion.setModel(new DefaultComboBoxModel(TipoIdentificacion.listar().toArray()));
-    cboEntidad.setModel(new DefaultComboBoxModel(Entidad.listar(true).toArray()));
+    cboEntidad.setModel(SwingUtil.getComboModel(Entidad.listar(true),true));
+    //cboEntidad.setModel(new DefaultComboBoxModel(Entidad.listar(true).toArray()));
     cboTipoUsuario.setModel(new DefaultComboBoxModel(TipoPaciente.listar().toArray()));
 }
 
