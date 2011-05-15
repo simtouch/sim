@@ -1,8 +1,12 @@
 package org.sim.repository.dao;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.sim.domain.Departamento;
+import static org.sim.domain.Departamento.Orden;
 import org.sim.repository.DepartamentoRepository;
 import org.sim.util.exceptions.RepositoryException;
 import org.springframework.dao.DataAccessException;
@@ -52,6 +56,30 @@ public class DepartamentoDao extends GenericDaoImpl implements DepartamentoRepos
             saveOrUpdate(departamento);
         }catch(DataAccessException ex){
             log.log(Level.WARNING, ex.getClass().getName() + "={0}", ex.getMessage());
+        }
+    }
+
+    public List<Departamento> listar() throws RepositoryException {
+        return listar(null);
+    }
+
+    public List<Departamento> listar(Orden ordenamiento) throws RepositoryException {
+        try{
+            DetachedCriteria dr = DetachedCriteria.forClass(Departamento.class);
+            if(ordenamiento != null){
+                switch(ordenamiento){
+                    case CODIGO:
+                        dr.addOrder(Order.asc("codigo"));
+                        break;
+                    case NOMBRE:
+                        dr.addOrder(Order.asc("nombre"));
+                        break;
+                }
+            }
+            return getHibernateTemplate().findByCriteria(dr);
+        }catch(DataAccessException ex){
+            log.log(Level.WARNING, ex.getClass().getName() + "={0}", ex.getMessage());
+            throw new RepositoryException("Excepción listando Departamentos");
         }
     }
 
