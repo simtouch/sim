@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.sim.repository.DepartamentoRepository;
+import org.sim.repository.MunicipioRepository;
 import org.sim.util.exceptions.BusinessException;
 import org.sim.util.exceptions.RepositoryException;
 
@@ -22,6 +23,8 @@ import org.sim.util.exceptions.RepositoryException;
 @Table(name = "departamentos")
 public class Departamento implements Serializable{
 
+    public enum Orden{CODIGO, NOMBRE}
+
     @Id
     @Column(name = "codigo_departamento")
     private String codigo;
@@ -29,8 +32,8 @@ public class Departamento implements Serializable{
     @Column(name = "nombre_departamento")
     private String nombre;
 
-    @OneToMany(mappedBy = "departamento")
-    private List<Municipio> municipios;
+//    @OneToMany(mappedBy = "departamento")
+//    private List<Municipio> municipios;
 
     public Departamento() {
     }
@@ -86,6 +89,11 @@ public class Departamento implements Serializable{
     public static Departamento cargar(String codigo) throws RepositoryException, BusinessException{
         Departamento d = DepartamentoRepository.Impl.getInstance().cargar(codigo);
         return d;
+    }
+
+    public List<Municipio> getMunicipios() throws RepositoryException, BusinessException{
+        MunicipioRepository mr = MunicipioRepository.Impl.getInstance();
+        return mr.listarPorDepartamento(this, Municipio.Orden.NOMBRE);
     }
 
 }

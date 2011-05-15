@@ -26,6 +26,7 @@ public class MedicamentoFrm extends javax.swing.JInternalFrame {
     /** Creates new form CUPSFrm */
     public MedicamentoFrm() {
         initComponents();
+        txtCodigo_Medicamento.setFocusTraversalKeysEnabled(false);
     }
 
     /** This method is called from within the constructor to
@@ -59,7 +60,7 @@ public class MedicamentoFrm extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 11));
         jLabel1.setText("Código");
 
-        txtCodigo_Medicamento.setFont(new java.awt.Font("Verdana", 0, 11));
+        txtCodigo_Medicamento.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         txtCodigo_Medicamento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCodigo_MedicamentoKeyPressed(evt);
@@ -163,7 +164,7 @@ public class MedicamentoFrm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

@@ -54,6 +54,7 @@ public class SwingUtil {
 
         for(Object o: list){
             array[index]=o;
+            index++;
         }
         DefaultComboBoxModel model = new DefaultComboBoxModel(array);
         return model;
