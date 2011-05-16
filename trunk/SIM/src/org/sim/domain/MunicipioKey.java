@@ -66,7 +66,7 @@ public class MunicipioKey implements Serializable{
 
     @Override
     public String toString() {
-        return this.codigoMunicipio+this.codigoDepartamento;
+        return this.codigoDepartamento + this.codigoMunicipio;
     }
 
 

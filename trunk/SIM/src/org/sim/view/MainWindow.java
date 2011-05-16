@@ -6,6 +6,8 @@
 
 package org.sim.view;
 
+import java.awt.Image;
+import org.sim.util.ImageHandler;
 import org.sim.view.MedicamentoFrm;
 import org.sim.view.actions.*;
 
@@ -69,6 +71,7 @@ public class MainWindow extends javax.swing.JFrame {
         opcionMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -80,33 +83,33 @@ public class MainWindow extends javax.swing.JFrame {
         toolBar.setAutoscrolls(true);
 
         pacientesButton.setAction(new MostrarFormPacientes(desktopPane, pacientesFrm));
-        pacientesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/people2.png"))); // NOI18N
+        pacientesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/people.png"))); // NOI18N
         pacientesButton.setFocusable(false);
         pacientesButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pacientesButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(pacientesButton);
 
-        entidadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/plus_24.png"))); // NOI18N
+        entidadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/plus_32.png"))); // NOI18N
         entidadButton.setFocusable(false);
         entidadButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         entidadButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(entidadButton);
         toolBar.add(jSeparator3);
 
-        agendaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/date_24.png"))); // NOI18N
+        agendaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/date.png"))); // NOI18N
         agendaButton.setFocusable(false);
         agendaButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         agendaButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(agendaButton);
 
-        historiaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/clipboard_24.png"))); // NOI18N
+        historiaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/clipboard.png"))); // NOI18N
         historiaButton.setFocusable(false);
         historiaButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         historiaButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(historiaButton);
         toolBar.add(jSeparator4);
 
-        opcionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/tools_24.png"))); // NOI18N
+        opcionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/tools_32.png"))); // NOI18N
         opcionButton.setFocusable(false);
         opcionButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         opcionButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -176,20 +179,23 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-            .addComponent(toolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .addComponent(toolBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public Image getIconImage(){
+        return ImageHandler.cretaeImage("people.png");
+    }
     private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salirMenuItemActionPerformed
