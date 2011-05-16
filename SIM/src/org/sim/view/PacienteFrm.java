@@ -91,6 +91,7 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Registro de Pacientes");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/Edit.png"))); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Pacientes"));
 
@@ -400,7 +401,7 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
