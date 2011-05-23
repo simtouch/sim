@@ -1,6 +1,7 @@
 
 package org.sim.repository;
 
+import java.io.Serializable;
 import java.util.List;
 import org.sim.domain.Departamento;
 import static org.sim.domain.Departamento.Orden;
@@ -17,7 +18,7 @@ public interface DepartamentoRepository /*extends GenericDao*/ {
     public void guardar(Departamento departamento)throws RepositoryException;
     public void actualizar(Departamento departamento)throws RepositoryException;
     public void guardarOrActualizar(Departamento departamento)throws RepositoryException;
-    public Departamento cargar(String codigo) throws RepositoryException;
+    public Departamento cargar(Serializable codigo) throws RepositoryException;
     public List<Departamento> listar() throws RepositoryException;
     public List<Departamento> listar(Orden orden) throws RepositoryException;
 

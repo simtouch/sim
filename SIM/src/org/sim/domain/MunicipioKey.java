@@ -8,6 +8,8 @@ package org.sim.domain;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -16,19 +18,46 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class MunicipioKey implements Serializable{
 
+    @ManyToOne
+    @JoinColumn(name="codigo_departamento")
+    private Departamento departamento;
+
     @Column(name="codigo_municipio")
     private String codigoMunicipio;
     
-    @Column(name="codigo_departamento")
-    private String codigoDepartamento;
+//    @Column(name="codigo_departamento")
+//    private String codigoDepartamento;
 
-    public String getCodigoDepartamento() {
-        return codigoDepartamento;
+    public MunicipioKey() {
     }
 
-    public void setCodigoDepartamento(String codigoDepartamento) {
-        this.codigoDepartamento = codigoDepartamento;
+    public MunicipioKey(Departamento departamento, String codigoMunicipio) {
+        this.departamento = departamento;
+        this.codigoMunicipio = codigoMunicipio;
     }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+
+
+//    public MunicipioKey(String codigoMunicipio, String codigoDepartamento) {
+//        this.codigoMunicipio = codigoMunicipio;
+//        this.codigoDepartamento = codigoDepartamento;
+//    }
+//
+//    public String getCodigoDepartamento() {
+//        return codigoDepartamento;
+//    }
+//
+//    public void setCodigoDepartamento(String codigoDepartamento) {
+//        this.codigoDepartamento = codigoDepartamento;
+//    }
 
     public String getCodigoMunicipio() {
         return codigoMunicipio;
@@ -47,10 +76,10 @@ public class MunicipioKey implements Serializable{
             return false;
         }
         final MunicipioKey other = (MunicipioKey) obj;
-        if ((this.codigoMunicipio == null) ? (other.codigoMunicipio != null) : !this.codigoMunicipio.equals(other.codigoMunicipio)) {
+        if (this.departamento != other.departamento && (this.departamento == null || !this.departamento.equals(other.departamento))) {
             return false;
         }
-        if ((this.codigoDepartamento == null) ? (other.codigoDepartamento != null) : !this.codigoDepartamento.equals(other.codigoDepartamento)) {
+        if ((this.codigoMunicipio == null) ? (other.codigoMunicipio != null) : !this.codigoMunicipio.equals(other.codigoMunicipio)) {
             return false;
         }
         return true;
@@ -59,18 +88,17 @@ public class MunicipioKey implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 11 * hash + (this.codigoMunicipio != null ? this.codigoMunicipio.hashCode() : 0);
-        hash = 11 * hash + (this.codigoDepartamento != null ? this.codigoDepartamento.hashCode() : 0);
+        hash = 43 * hash + (this.departamento != null ? this.departamento.hashCode() : 0);
+        hash = 43 * hash + (this.codigoMunicipio != null ? this.codigoMunicipio.hashCode() : 0);
         return hash;
     }
 
+
     @Override
     public String toString() {
-        return this.codigoDepartamento + this.codigoMunicipio;
+        return this.departamento.getCodigo() + this.codigoMunicipio;
     }
 
-
-
-    
+   
 
 }

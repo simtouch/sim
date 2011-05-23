@@ -40,7 +40,7 @@
               <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -481,10 +481,7 @@
         <Component class="javax.swing.JComboBox" name="cboSexo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="F - Femenino"/>
-                <StringItem index="1" value="M - Masculino"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
         </Component>
@@ -504,7 +501,7 @@
         <Component class="javax.swing.JButton" name="btnNuevo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/sim/view/images/page.png"/>
+              <Image iconType="3" name="/org/sim/view/images/24x24/new_document.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Nuevo Registro"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -518,7 +515,7 @@
         <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/sim/view/images/disk.png"/>
+              <Image iconType="3" name="/org/sim/view/images/24x24/save_24.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Guardar Registro"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -534,7 +531,7 @@
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/sim/view/images/page_white_magnify.png"/>
+              <Image iconType="3" name="/org/sim/view/images/24x24/edit-find.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Vista Preliminar"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -545,7 +542,7 @@
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/sim/view/images/printer.png"/>
+              <Image iconType="3" name="/org/sim/view/images/24x24/printer.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Imprimir"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -558,7 +555,7 @@
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/sim/view/images/magnifier.png"/>
+              <Image iconType="3" name="/org/sim/view/images/24x24/Binoculars.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Consular"/>
             <Property name="focusable" type="boolean" value="false"/>

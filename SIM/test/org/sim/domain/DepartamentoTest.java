@@ -4,6 +4,7 @@ package org.sim.domain;
 import java.util.List;
 import java.util.logging.Logger;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.sim.repository.DepartamentoRepository;
@@ -34,14 +35,25 @@ public class DepartamentoTest{
 
         int recordAmount = lst.size();
 
-        System.out.println("Cantidad de Registros ----> "+recordAmount);
+        System.out.println("Cantidad de Departamentos ----> "+recordAmount);
+        imprimirDepartamentos(lst);
 
-//        Departamento d = new Departamento();
-//        dr.guardar(d);
+        System.out.println(">>>> Cargando el Departamento");
+        Departamento d = Departamento.cargar("11");
+        Assert.assertNotNull("El departamento cargado es nulo", d);
+
+        System.out.println(">>>> Listando municipios del departamento");
+        final List<Municipio> municipios = d.getMunicipios();
+        System.out.println("Cantidad de Municipios ----> " + municipios.size());
+        imprimirMunicipios(municipios);
+        
+        //Departamento d1= new Departamento("AA", "A PRUEBA");
+        //d1.guardar();
+        //        dr.guardar(d);
 
 //        lst = dr.listar();
        
-        imprimirLista(lst);
+
        
  //       d.setNombre("NUEVA PREUBA");
  //       dr.actualizar(d);
@@ -58,11 +70,21 @@ public class DepartamentoTest{
     }
 
 
-    private void imprimirLista(List<Departamento> lst){
+    private void imprimirDepartamentos(List<Departamento> lst){
         System.out.println("///////////         LISTANDO         //////////////////");
 
         for(Departamento dep: lst){
            System.out.println(dep.getCodigo() + " - " + dep.getNombre());
+           System.out.println("-----------------------------------------");
+        }
+
+    }
+
+    private void imprimirMunicipios(List<Municipio> lst){
+        System.out.println("///////////         LISTANDO         //////////////////");
+
+        for(Municipio m: lst){
+           System.out.println(m + " - " + m.getNombre());
            System.out.println("-----------------------------------------");
         }
 

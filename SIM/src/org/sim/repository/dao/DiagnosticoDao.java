@@ -1,5 +1,6 @@
 package org.sim.repository.dao;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.sim.domain.Cups;
@@ -37,7 +38,7 @@ public class DiagnosticoDao extends GenericDaoImpl implements DiagnosticoReposit
     }
 
     @Transactional(readOnly=true)
-    public Diagnostico cargar(String codigo) throws RepositoryException {
+    public Diagnostico cargar(Serializable codigo) throws RepositoryException {
         Diagnostico diagnostico=null;
         try{
             diagnostico = getById(Diagnostico.class, codigo);

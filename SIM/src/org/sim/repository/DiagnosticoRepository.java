@@ -5,6 +5,7 @@
 
 package org.sim.repository;
 
+import java.io.Serializable;
 import org.sim.domain.Cups;
 import org.sim.domain.Diagnostico;
 import org.sim.util.BeanContainer;
@@ -21,7 +22,7 @@ public interface DiagnosticoRepository /*extends GenericDao*/ {
     public void guardar(Diagnostico diagnostico)throws RepositoryException;
     public void actualizar(Diagnostico diagnostico)throws RepositoryException;
     public void guardarOrActualizar(Diagnostico diagnostico)throws RepositoryException;
-    public Diagnostico cargar(String codigo)throws RepositoryException;
+    public Diagnostico cargar(Serializable codigo)throws RepositoryException;
 
     public static class Impl{
         public static DiagnosticoRepository getInstance(){

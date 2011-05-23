@@ -1,5 +1,6 @@
 package org.sim.repository.dao;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.sim.domain.Cups;
@@ -36,7 +37,7 @@ public class CupsDao extends GenericDaoImpl implements CupsRepository{
     }
 
     @Transactional(readOnly=true)
-    public Cups cargar(String codigo) throws RepositoryException {
+    public Cups cargar(Serializable codigo) throws RepositoryException {
         Cups cups=null;
         try{
             cups = getById(Cups.class, codigo);

@@ -1,13 +1,12 @@
 
 package org.sim.domain;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import junit.framework.Assert;
 import org.sim.repository.PacienteRepository;
 
@@ -15,8 +14,8 @@ import org.sim.repository.PacienteRepository;
  *
  * @author Franky Villadiego
  */
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class PacienteTest extends AbstractJUnit4SpringContextTests{
+
+public class PacienteTest{
 
 
     private static final Logger log=Logger.getLogger(PacienteTest.class.getName());
@@ -32,44 +31,68 @@ public class PacienteTest extends AbstractJUnit4SpringContextTests{
 
     @Test
     public void testBasico(){
-        PacienteRepository pacienteRepository = PacienteRepository.Impl.getInstance();
-        List<Paciente> lst=pacienteRepository.listarPacientes();
-        //List<PatientJpa> lst=patientDao.listAll(PatientJpa.class);
+        PacienteRepository rep = PacienteRepository.Impl.getInstance();
+        List<Paciente> lst=rep.listarPacientes();
         int recordAmount = lst.size();
 
         System.out.println("Cantidad de Registros ----> "+recordAmount);
-        Paciente p = new Paciente(123456789, "JULANO", "DE TAL");
-        pacienteRepository.guardar(p);
-        //PatientJpa p=createPatient("PRUEBA");
-        //patientDao.insert(p);
-        lst = pacienteRepository.listarPacientes();
-        //lst=patientDao.listAll(PatientJpa.class);
+        final TipoIdentificacion ti = TipoIdentificacion.cargar("CC");
+        CodigoPaciente cp = new  CodigoPaciente();
+        cp.setIdentificacion("123456");
+        cp.setTipoIdentificacion(ti);
+        final Entidad e = Entidad.cargar("EPS001");
+        final Departamento dep = Departamento.cargar("05");
+        final Municipio mun = Municipio.cargar("001", dep);
+        final TipoPaciente tp = TipoPaciente.cargar("1");
+        Assert.assertNotNull(ti);
+        Assert.assertNotNull(e);
+        Assert.assertNotNull(dep);
+        Assert.assertNotNull(mun);
+        Assert.assertNotNull(tp);
+        Paciente p = crear(cp, e, mun, tp);
+        Antecedente a1 = new Antecedente();
+        a1.setDescripcion("GRIPE SENCILLA");
+        a1.setFecha(new Date());
+        a1.setTipo(TipoAntecedente.PERSONAL);
+        p.addAntecedente(a1);
+        rep.guardar(p);
+
+        lst = rep.listarPacientes();
+
         System.out.println("***********************************");
-       for(Paciente o: lst){
-           System.out.println(o.getCedula() + " - " + o.getNombre() + " - " + o.getApellido());
+        for(Paciente o: lst){
+           System.out.println(o.getCodigo() + " - " + o.getPrimerApellido() + " - " + o.getPrimerNombre());
            System.out.println("-----------------------------------------");
-       }
+        }
 
-       p.setNombre("NUEVA PREUBA");
-       pacienteRepository.actualizar(p);
-       //patientDao.update(p);
+        //rep.eliminar(p);
 
-       lst = pacienteRepository.listarPacientes();
-       //lst=patientDao.listAll(PatientJpa.class);
-       System.out.println("***********************************");
-       
-       for(Paciente o: lst){
-           System.out.println(o.getCedula() + " - " + o.getNombre() + " - " + o.getApellido());
-           System.out.println("-----------------------------------------");
-       }
-       //p.eliminar();
-       //patientDao.delete(p);
-       pacienteRepository.eliminar(p);
-
-        List<Paciente> lst2=pacienteRepository.listarPacientes();
-        Assert.assertEquals(recordAmount, lst2.size());
+        List<Paciente> lst2=rep.listarPacientes();
+        Assert.assertEquals(recordAmount+1, lst2.size());
     }
 
 
+    private Paciente crear(CodigoPaciente cod, Entidad ent, Municipio mun, TipoPaciente tp){
+
+        Paciente p = new Paciente();
+        p.setCodigo(cod);
+
+        p.setCorreoElectronico("frankyjose@hotmail.com");
+        p.setDireccion("Caracas, Brisas de Propatria");
+        p.setEntidad(ent);
+        p.setFechaNacimiento(new Date());
+        p.setMunicipio(mun);
+        p.setPrimerApellido("VILLADIEGO");
+        p.setPrimerNombre("FRANKY");
+        p.setSegundoApellido("NARVAEZ");
+        p.setSegundoNombre("JOSE");
+        p.setSexo(Sexo.M);
+        p.setTelefonoFijo("6190518");
+        p.setTelefonoMovil("04148077886");
+        p.setTipoPaciente(tp);
+        p.setZona(Zona.U);
+
+        return p;
+    }
 
 }

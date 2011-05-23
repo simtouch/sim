@@ -1,5 +1,6 @@
 package org.sim.repository.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class EntidadDao extends GenericDaoImpl implements EntidadRepository{
     }
 
     @Transactional(readOnly=true)
-    public Entidad cargar(String codigo) throws RepositoryException {
+    public Entidad cargar(Serializable codigo) throws RepositoryException {
         Entidad entidad=null;
         try{
             entidad = getById(Entidad.class, codigo);

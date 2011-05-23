@@ -5,6 +5,7 @@
 
 package org.sim.repository;
 
+import java.io.Serializable;
 import java.util.List;
 import org.sim.domain.TipoIdentificacion;
 import org.sim.util.BeanContainer;
@@ -17,7 +18,7 @@ import org.sim.util.exceptions.RepositoryException;
 public interface TipoIdentificacionRepository /*extends GenericDao*/ {
 
 
-    public TipoIdentificacion cargar(String codigo)throws RepositoryException;
+    public TipoIdentificacion cargar(Serializable codigo)throws RepositoryException;
     public List<TipoIdentificacion> listar()throws RepositoryException;
 
     public static class Impl{

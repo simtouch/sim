@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -16,6 +17,9 @@ public class Main {
     public static final String path;
     public static final String imagePath;
     public static final String reportPath;
+
+    private static final String NIMBUS_LOOK_AND_FEEL = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
+    private static final String WINDOWS_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 
     /*
      * Inicializaciones basicas como rutas(de imagenes, reportes, etc)
@@ -45,8 +49,30 @@ public class Main {
 
             @Override
             public void run() {
+                boolean nimbus=false, windows=false;;
+
                 try {
-                   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    final LookAndFeelInfo[] feels = UIManager.getInstalledLookAndFeels();
+                    for(LookAndFeelInfo lf : feels){
+                        if(lf.getClassName().equals(NIMBUS_LOOK_AND_FEEL)){
+                            nimbus=true;
+                        }
+                        if(lf.getClassName().equals(WINDOWS_LOOK_AND_FEEL)){
+                            windows=true;
+                        }
+
+                    }
+                    if(nimbus){
+                        UIManager.setLookAndFeel(NIMBUS_LOOK_AND_FEEL);
+                    }else{
+                        if(windows){
+                            UIManager.setLookAndFeel(WINDOWS_LOOK_AND_FEEL);
+                        }else{
+                            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                        }
+                    }
+                    
+                  
                 } catch (UnsupportedLookAndFeelException ex) {
                     ex.printStackTrace();
                 } catch (IllegalAccessException ex){

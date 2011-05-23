@@ -1,13 +1,11 @@
 package org.sim.repository.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.sim.domain.Cups;
-import org.sim.domain.TipoIdentificacion;
 import org.sim.domain.TipoPaciente;
-import org.sim.repository.TipoIdentificacionRepository;
 import org.sim.repository.TipoPacienteRepository;
 import org.sim.util.exceptions.RepositoryException;
 import org.springframework.dao.DataAccessException;
@@ -23,7 +21,7 @@ public class TipoPacienteDao extends GenericDaoImpl implements TipoPacienteRepos
     private static final Logger log = Logger.getLogger(TipoPacienteDao.class.getName());
 
     @Transactional(readOnly=true)
-    public TipoPaciente cargar(String codigo) throws RepositoryException {
+    public TipoPaciente cargar(Serializable codigo) throws RepositoryException {
         TipoPaciente tipoPaciente = null;
         try{
             tipoPaciente = getById(TipoPaciente.class, codigo);
