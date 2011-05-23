@@ -32,33 +32,30 @@ public class MunicipioTest{
     @Test
     public void testBasico(){
         MunicipioRepository mr = MunicipioRepository.Impl.getInstance();
+        System.out.println(">>> Cargando departamento");
         final Departamento dep = Departamento.cargar("11");
-        List<Municipio> lst = dep.getMunicipios();
-        //List<Municipio> lst = mr.listarPorDepartamento(dep, Orden.NOMBRE);
 
+        System.out.println(">>> Listando municipios");
+        List<Municipio> lst = dep.getMunicipios();
+        
         int recordAmount = lst.size();
 
         System.out.println("Cantidad de Registros ----> "+recordAmount);
-
-//        Departamento d = new Departamento();
-//        dr.guardar(d);
-
-//        lst = dr.listar();
-       
         imprimirLista(lst);
-       
- //       d.setNombre("NUEVA PREUBA");
- //       dr.actualizar(d);
-       
 
- //     lst = dr.listar();
-       
- //     imprimirLista(lst);
-       
- //      //dr.eliminar(d);
+//        Municipio m = new Municipio("AAA",dep,"A PRUEBA MUN");
+//        m.guardar();
 
-//        List<Departamento> lst2=dr.listar();
-//        Assert.assertEquals(recordAmount, lst2.size());
+
+//        System.out.println(">>> Listando municipios");
+//        lst = dep.getMunicipios();
+//
+//        recordAmount = lst.size();
+//
+//        System.out.println("Cantidad de Registros ----> "+recordAmount);
+//        imprimirLista(lst);
+        
+
     }
 
 

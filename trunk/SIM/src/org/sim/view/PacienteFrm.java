@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import org.sim.domain.Departamento;
 import org.sim.domain.Departamento.Orden;
 import org.sim.domain.Entidad;
+import org.sim.domain.Sexo;
 import org.sim.domain.TipoIdentificacion;
 import org.sim.domain.TipoPaciente;
 import org.sim.repository.DepartamentoRepository;
@@ -32,6 +33,7 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
     /** Creates new form PacienteFrm */
     public PacienteFrm() {
         initComponents();
+        cboSexo.setModel(new DefaultComboBoxModel(Sexo.values()));
     }
     
     /** This method is called from within the constructor to
@@ -226,8 +228,6 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
         txtEdad.setBackground(new java.awt.Color(255, 255, 204));
         txtEdad.setEditable(false);
 
-        cboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "F - Femenino", "M - Masculino" }));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -338,7 +338,7 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/page.png"))); // NOI18N
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/24x24/new_document.png"))); // NOI18N
         btnNuevo.setToolTipText("Nuevo Registro");
         btnNuevo.setFocusable(false);
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -350,7 +350,7 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btnNuevo);
 
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/disk.png"))); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/24x24/save_24.png"))); // NOI18N
         btnGuardar.setToolTipText("Guardar Registro");
         btnGuardar.setFocusable(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -363,14 +363,14 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
         jToolBar1.add(btnGuardar);
         jToolBar1.add(jSeparator1);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/page_white_magnify.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/24x24/edit-find.png"))); // NOI18N
         jButton3.setToolTipText("Vista Preliminar");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton3);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/printer.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/24x24/printer.png"))); // NOI18N
         jButton4.setToolTipText("Imprimir");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -378,7 +378,7 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
         jToolBar1.add(jButton4);
         jToolBar1.add(jSeparator2);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/magnifier.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sim/view/images/24x24/Binoculars.png"))); // NOI18N
         jButton5.setToolTipText("Consular");
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -401,7 +401,7 @@ public class PacienteFrm extends javax.swing.JInternalFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();

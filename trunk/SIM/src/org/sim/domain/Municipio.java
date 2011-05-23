@@ -35,6 +35,17 @@ public class Municipio implements Serializable{
     @Column(name = "nombre_municipio")
     private String nombre;
 
+    public Municipio() {
+    }
+
+    public Municipio(String codigo, Departamento dep, String nombre) {
+        MunicipioKey key = new MunicipioKey(dep, codigo);
+        this.identificador = key;
+        this.nombre = nombre;
+    }
+
+
+
 
 //    @ManyToOne
 //    @JoinColumn(name="codigo_departamento")
@@ -104,10 +115,18 @@ public class Municipio implements Serializable{
 
 
     public void guardar() throws RepositoryException, BusinessException{
+        MunicipioRepository.Impl.getInstance().guardar(this);
     }
 
-    public static Municipio cargar(String codigo) throws RepositoryException, BusinessException{
-        Municipio m = MunicipioRepository.Impl.getInstance().cargar(codigo);
+    public static Municipio cargar(String codigo, Departamento dep) throws RepositoryException, BusinessException{
+        if(codigo==null){
+            throw new BusinessException("El codigo del municipio es nulo");
+        }
+        if(dep==null){
+            throw new BusinessException("El Departamento es nulo");
+        }
+        MunicipioKey key = new MunicipioKey(dep, codigo);
+        Municipio m = MunicipioRepository.Impl.getInstance().cargar(key);
         return m;
     }
 

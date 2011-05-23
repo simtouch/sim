@@ -1,6 +1,7 @@
 
 package org.sim.repository;
 
+import java.io.Serializable;
 import java.util.List;
 import org.sim.domain.Departamento;
 import org.sim.domain.Municipio;
@@ -18,7 +19,7 @@ public interface MunicipioRepository /*extends GenericDao*/ {
     public void guardar(Municipio municipio) throws RepositoryException;
     public void actualizar(Municipio municipio) throws RepositoryException;
     public void guardarOrActualizar(Municipio municipio) throws RepositoryException;
-    public Municipio cargar(String codigo) throws RepositoryException;
+    public Municipio cargar(Serializable codigo) throws RepositoryException;
     public List<Municipio> listarPorDepartamento(Departamento departamento) throws RepositoryException;
     public List<Municipio> listarPorDepartamento(Departamento departamento, Orden orden) throws RepositoryException;
 

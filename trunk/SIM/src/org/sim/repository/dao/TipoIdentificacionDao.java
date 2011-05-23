@@ -1,5 +1,6 @@
 package org.sim.repository.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ public class TipoIdentificacionDao extends GenericDaoImpl implements TipoIdentif
     private static final Logger log = Logger.getLogger(TipoIdentificacionDao.class.getName());
 
     @Transactional(readOnly=true)
-    public TipoIdentificacion cargar(String codigo) throws RepositoryException {
+    public TipoIdentificacion cargar(Serializable codigo) throws RepositoryException {
         TipoIdentificacion tipoidentificacion=null;
         try{
             tipoidentificacion = getById(TipoIdentificacion.class, codigo);

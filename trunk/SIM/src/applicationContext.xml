@@ -59,7 +59,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${jdbc.dialect}</prop>
-                <!--prop key="hibernate.hbm2ddl.auto">update</prop-->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.current_session_context_class">thread</prop>
                 <prop key="hibernate.show_sql">${jdbc.showSql}</prop>
             </props>
@@ -110,6 +110,10 @@
     </bean>
 
     <bean id="municipioRepository" class="org.sim.repository.dao.MunicipioDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+
+    <bean id="pacienteRepository" class="org.sim.repository.dao.PacienteDao">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 

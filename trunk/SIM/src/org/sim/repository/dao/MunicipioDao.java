@@ -1,5 +1,6 @@
 package org.sim.repository.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +44,7 @@ public class MunicipioDao extends GenericDaoImpl implements MunicipioRepository{
     }
 
     @Transactional(readOnly=true)
-    public Municipio cargar(String codigo) throws RepositoryException {
+    public Municipio cargar(Serializable codigo) throws RepositoryException {
         Municipio municipio=null;
         try{
             municipio = getById(Municipio.class, codigo);
@@ -84,7 +85,7 @@ public class MunicipioDao extends GenericDaoImpl implements MunicipioRepository{
                         break;
                 }
             }
-            criteria.add(Restrictions.like("identificador.codigoDepartamento", departamento.getCodigo()));
+            criteria.add(Restrictions.like("identificador.departamento", departamento));
             lst = getHibernateTemplate().findByCriteria(criteria);
         }catch(DataAccessException ex){
             log.log(Level.WARNING, ex.getClass().getName() + "={0}", ex.getMessage());
